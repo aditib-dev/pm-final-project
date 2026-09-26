@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velocity Driver Journey</title>
+<style>
+  :root {
+    --bg: #faf9f6; --card: #ffffff; --text: #1f1e1c; --muted: #5f5e5a; --line: #d3d1c7;
+    --teal-bg: #e1f5ee; --teal-bd: #0f6e56; --teal-tx: #085041;
+    --gray-bg: #f1efe8; --gray-bd: #888780; --gray-tx: #444441;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1b19; --card: #262523; --text: #eeede8; --muted: #b4b2a9; --line: #444441;
+      --teal-bg: #085041; --teal-bd: #5dcaa5; --teal-tx: #e1f5ee;
+      --gray-bg: #2c2c2a; --gray-bd: #888780; --gray-tx: #d3d1c7;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.55; }
+  main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+  header p { color: var(--muted); margin: 4px 0 0; }
+  h1 { font-size: 26px; font-weight: 600; margin: 0; }
+  h2 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; }
+  .persona { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-top: 20px; }
+  .persona dl { margin: 0; display: grid; grid-template-columns: 90px 1fr; gap: 6px 12px; }
+  .persona dt { font-weight: 600; color: var(--muted); }
+  .persona dd { margin: 0; }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+  .stage { display: flex; flex-direction: column; gap: 10px; position: relative; }
+  .stage:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 22px; color: var(--muted); font-size: 16px; }
+  .step { background: var(--teal-bg); border: 1px solid var(--teal-bd); color: var(--teal-tx); border-radius: 10px; padding: 12px; text-align: center; }
+  .step strong { display: block; font-size: 15px; }
+  .step span { font-size: 13px; opacity: .85; }
+  .pain { background: var(--gray-bg); border: 1px solid var(--gray-bd); color: var(--gray-tx); border-radius: 10px; padding: 10px; text-align: center; font-size: 13px; }
+  .pain b { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; opacity: .7; }
+  ol.stages { padding-left: 20px; margin: 0; }
+  ol.stages > li { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; }
+  ol.stages > li > strong { font-size: 16px; }
+  ol.stages ul { margin: 8px 0 0; padding-left: 18px; }
+  ol.stages ul li { margin: 4px 0; }
+  .label { font-weight: 600; }
+  .cite { color: var(--muted); font-size: 13px; }
+  ol.adv li { margin: 6px 0; }
+  .note { background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 12px 18px; color: var(--muted); font-size: 14px; margin-top: 24px; }
+  @media (max-width: 720px) {
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .stage:not(:last-child)::after { display: none; }
+  }
+  @media print {
+    body { background: #fff; color: #000; }
+    main { padding: 12px; }
+    h2 { margin-top: 18px; }
+    ol.stages > li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Velocity: driver future-state journey</h1>
+    <p>RouteLogic · Module 1 · Strategy: reclaim operational simplicity by stripping away legacy noise and making the tool the fastest for everyday work.</p>
+  </header>
+
+  <section class="persona" aria-label="Persona">
+    <dl>
+      <dt>Persona</dt><dd>The frontline driver (composite of UXR-01, 08, 11, 12)</dd>
+      <dt>Role</dt><dd>An experienced delivery driver who completes dozens of stops a day, often in poor conditions and with their hands full.</dd>
+      <dt>Goal</dt><dd>Get through the route fast, with every delivery recorded correctly the first time.</dd>
+      <dt>Workaround</dt><dd>Texts the dispatcher instead of marking stops delivered in the app (UXR-01).</dd>
+    </dl>
+  </section>
+
+  <h2>Journey timeline</h2>
+  <div class="timeline">
+    <div class="stage">
+      <div class="step"><strong>1. Start route</strong><span>One tap, home screen</span></div>
+      <div class="pain"><b>Pain removed</b>Buried button</div>
+    </div>
+    <div class="stage">
+      <div class="step"><strong>2. Work the route</strong><span>Stop list first</span></div>
+      <div class="pain"><b>Pain removed</b>Nested menus</div>
+    </div>
+    <div class="stage">
+      <div class="step"><strong>3. Complete stop</strong><span>Single tap</span></div>
+      <div class="pain"><b>Pain removed</b>Three screens</div>
+    </div>
+    <div class="stage">
+      <div class="step"><strong>4. Close route</strong><span>All in the app</span></div>
+      <div class="pain"><b>Pain removed</b>Texting dispatch</div>
+    </div>
+  </div>
+
+  <h2>The four stages</h2>
+  <ol class="stages">
+    <li><strong>Start the route</strong>
+      <ul>
+        <li><span class="label">User action:</span> Taps "Start Route" from the home screen → the route begins immediately, with no hunting.</li>
+        <li><span class="label">Internal state:</span> Finds the daily action first → feels in control from the first minute.</li>
+        <li><span class="label">Pain point addressed:</span> Removes the buried button used 30 times a day. <span class="cite">(UXR-11, BUG-2079)</span></li>
+      </ul>
+    </li>
+    <li><strong>Work the route</strong>
+      <ul>
+        <li><span class="label">User action:</span> Opens the next stop straight from the stop list → no menu diving between deliveries.</li>
+        <li><span class="label">Internal state:</span> Knows where every core action lives → calm, even in week two.</li>
+        <li><span class="label">Pain point addressed:</span> Replaces menus inside menus → new drivers can find failed-delivery reporting. <span class="cite">(UXR-08)</span></li>
+      </ul>
+    </li>
+    <li><strong>Complete the stop</strong>
+      <ul>
+        <li><span class="label">User action:</span> Taps once at the doorstep → the stop is recorded, even with one hand full.</li>
+        <li><span class="label">Internal state:</span> Delivery done and recorded in one moment → no reason to text instead.</li>
+        <li><span class="label">Pain point addressed:</span> Replaces three taps across three screens, the top frontline complaint. <span class="cite">(UXR-01, BUG-2055)</span></li>
+      </ul>
+    </li>
+    <li><strong>Close the route</strong>
+      <ul>
+        <li><span class="label">User action:</span> Finishes with every stop logged in the app → nothing left to reconcile.</li>
+        <li><span class="label">Internal state:</span> Ends the shift actually done → no follow-up messages to dispatch.</li>
+        <li><span class="label">Pain point addressed:</span> Ends the texting workaround → completions stay in the platform the customer pays for. <span class="cite">(UXR-10)</span></li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>Competitive advantages over the manual workaround</h2>
+  <ol class="adv">
+    <li><strong>Fewer steps at the door:</strong> one tap replaces switching apps, naming the stop and sending a text.</li>
+    <li><strong>The record lives where it belongs:</strong> completion is logged against the stop, not buried in a message thread.</li>
+    <li><strong>No second person needed:</strong> dispatchers no longer read, interpret or re-enter drivers' texts.</li>
+  </ol>
+
+  <div class="note">
+    <strong>Scope:</strong> This journey covers what Velocity changes. It does not address mid-route crashes, offline failure, photo upload failures or dashboard lag (BUG-2031, 2050, 2061, 2072), so a completion logged in stage 4 may still reach the dispatcher's board late.
+  </div>
+</main>
+</body>
+</html>
