@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Velocity Driver Journey</title>
+<title>Velocity Dispatcher Journey</title>
 <style>
   :root {
     --bg: #faf9f6; --card: #ffffff; --text: #1f1e1c; --muted: #5f5e5a; --line: #d3d1c7;
@@ -24,7 +24,7 @@
   h1 { font-size: 26px; font-weight: 600; margin: 0; }
   h2 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; }
   .persona { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-top: 20px; }
-  .persona dl { margin: 0; display: grid; grid-template-columns: 90px 1fr; gap: 6px 12px; }
+  .persona dl { margin: 0; display: grid; grid-template-columns: 100px 1fr; gap: 6px 12px; }
   .persona dt { font-weight: 600; color: var(--muted); }
   .persona dd { margin: 0; }
   .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
@@ -44,6 +44,7 @@
   .cite { color: var(--muted); font-size: 13px; }
   ol.adv li { margin: 6px 0; }
   .note { background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 12px 18px; color: var(--muted); font-size: 14px; margin-top: 24px; }
+  .note ul { margin: 6px 0 0; padding-left: 18px; }
   @media (max-width: 720px) {
     .timeline { grid-template-columns: 1fr 1fr; }
     .stage:not(:last-child)::after { display: none; }
@@ -59,80 +60,84 @@
 <body>
 <main>
   <header>
-    <h1>Velocity: driver future-state journey</h1>
-    <p>RouteLogic · Module 1 · Strategy: reclaim operational simplicity by stripping away legacy noise and making the tool the fastest for everyday work.</p>
+    <h1>Velocity: dispatcher future-state journey</h1>
+    <p>RouteLogic · Strategy: reclaim operational simplicity by stripping away legacy noise and making the tool the fastest for everyday work.</p>
   </header>
 
   <section class="persona" aria-label="Persona">
     <dl>
-      <dt>Persona</dt><dd>The frontline driver (composite of UXR-01, 08, 11, 12)</dd>
-      <dt>Role</dt><dd>An experienced delivery driver who completes dozens of stops a day, often in poor conditions and with their hands full.</dd>
-      <dt>Goal</dt><dd>Get through the route fast, with every delivery recorded correctly the first time.</dd>
-      <dt>Workaround</dt><dd>Texts the dispatcher instead of marking stops delivered in the app (UXR-01).</dd>
+      <dt>Persona</dt><dd>The dispatcher (composite of UXR-02, 09; treated as the "Coordinator" in Snapshots 2–3)</dd>
+      <dt>Role</dt><dd>A fleet dispatcher who assigns and reassigns routes and monitors drivers in real time.</dd>
+      <dt>Goal</dt><dd>Know where every driver and stop stands, and have route changes acted on immediately.</dd>
+      <dt>Workaround</dt><dd>Runs live coordination through a WhatsApp group, "the real system" (UXR-02).</dd>
     </dl>
   </section>
 
   <h2>Journey timeline</h2>
   <div class="timeline">
     <div class="stage">
-      <div class="step"><strong>1. Start route</strong><span>One tap, home screen</span></div>
-      <div class="pain"><b>Pain removed</b>Buried button</div>
+      <div class="step"><strong>1. Open the board</strong><span>Live status</span></div>
+      <div class="pain"><b>Pain removed</b>Stale statuses</div>
     </div>
     <div class="stage">
-      <div class="step"><strong>2. Work the route</strong><span>Stop list first</span></div>
-      <div class="pain"><b>Pain removed</b>Nested menus</div>
+      <div class="step"><strong>2. Assign routes</strong><span>Faster optimizer</span></div>
+      <div class="pain"><b>Pain removed</b>Slow assignment</div>
     </div>
     <div class="stage">
-      <div class="step"><strong>3. Complete stop</strong><span>Single tap</span></div>
-      <div class="pain"><b>Pain removed</b>Three screens</div>
+      <div class="step"><strong>3. Reassign mid-route</strong><span>Driver confirms</span></div>
+      <div class="pain"><b>Pain removed</b>15-minute delay</div>
     </div>
     <div class="stage">
-      <div class="step"><strong>4. Close route</strong><span>All in the app</span></div>
-      <div class="pain"><b>Pain removed</b>Texting dispatch</div>
+      <div class="step"><strong>4. Hand off shift</strong><span>Board matches reality</span></div>
+      <div class="pain"><b>Pain removed</b>WhatsApp as system</div>
     </div>
   </div>
 
   <h2>The four stages</h2>
   <ol class="stages">
-    <li><strong>Start the route</strong>
+    <li><strong>Open the fleet board</strong>
       <ul>
-        <li><span class="label">User action:</span> Taps "Start Route" from the home screen → the route begins immediately, with no hunting.</li>
-        <li><span class="label">Internal state:</span> Finds the daily action first → feels in control from the first minute.</li>
-        <li><span class="label">Pain point addressed:</span> Removes the buried button used 30 times a day. <span class="cite">(UXR-11, BUG-2079)</span></li>
+        <li><span class="label">User action:</span> Loads the fleet view with live stop statuses → sees the real state instantly.</li>
+        <li><span class="label">Internal state:</span> Trusts what the board shows → no need to cross-check WhatsApp.</li>
+        <li><span class="label">Pain point addressed:</span> Replaces stops showing "in progress" an hour after delivery. <span class="cite">(UXR-09, BUG-2072)</span></li>
       </ul>
     </li>
-    <li><strong>Work the route</strong>
+    <li><strong>Assign routes</strong>
       <ul>
-        <li><span class="label">User action:</span> Opens the next stop straight from the stop list → no menu diving between deliveries.</li>
-        <li><span class="label">Internal state:</span> Knows where every core action lives → calm, even in week two.</li>
-        <li><span class="label">Pain point addressed:</span> Replaces menus inside menus → new drivers can find failed-delivery reporting. <span class="cite">(UXR-08)</span></li>
+        <li><span class="label">User action:</span> Assigns routes through the optimizer in minutes → more time for live exceptions.</li>
+        <li><span class="label">Internal state:</span> Plans the day in one pass → confident before drivers roll out.</li>
+        <li><span class="label">Pain point addressed:</span> Closes the 8.2-minute vs 4.0-minute assignment gap; pilot showed +34%. <span class="cite">(Snapshots 2–3)</span></li>
       </ul>
     </li>
-    <li><strong>Complete the stop</strong>
+    <li><strong>Reassign mid-route</strong>
       <ul>
-        <li><span class="label">User action:</span> Taps once at the doorstep → the stop is recorded, even with one hand full.</li>
-        <li><span class="label">Internal state:</span> Delivery done and recorded in one moment → no reason to text instead.</li>
-        <li><span class="label">Pain point addressed:</span> Replaces three taps across three screens, the top frontline complaint. <span class="cite">(UXR-01, BUG-2055)</span></li>
+        <li><span class="label">User action:</span> Pushes a route change → the driver is notified and acknowledges in the app.</li>
+        <li><span class="label">Internal state:</span> Sees the driver confirm → knows the change landed before a wrong turn.</li>
+        <li><span class="label">Pain point addressed:</span> Ends 8–15 minute propagation with no notification. <span class="cite">(UXR-02, BUG-2044)</span></li>
       </ul>
     </li>
-    <li><strong>Close the route</strong>
+    <li><strong>Hand off the shift</strong>
       <ul>
-        <li><span class="label">User action:</span> Finishes with every stop logged in the app → nothing left to reconcile.</li>
-        <li><span class="label">Internal state:</span> Ends the shift actually done → no follow-up messages to dispatch.</li>
-        <li><span class="label">Pain point addressed:</span> Ends the texting workaround → completions stay in the platform the customer pays for. <span class="cite">(UXR-10)</span></li>
+        <li><span class="label">User action:</span> Hands over a board that matches reality → the next dispatcher starts informed.</li>
+        <li><span class="label">Internal state:</span> Nothing lives only in a chat thread → a clean handoff.</li>
+        <li><span class="label">Pain point addressed:</span> Retires WhatsApp as "the real system." <span class="cite">(UXR-02; handoff 11.3 vs 4.5 min, Snapshot 2, link inferred)</span></li>
       </ul>
     </li>
   </ol>
 
   <h2>Competitive advantages over the manual workaround</h2>
   <ol class="adv">
-    <li><strong>Fewer steps at the door:</strong> one tap replaces switching apps, naming the stop and sending a text.</li>
-    <li><strong>The record lives where it belongs:</strong> completion is logged against the stop, not buried in a message thread.</li>
-    <li><strong>No second person needed:</strong> dispatchers no longer read, interpret or re-enter drivers' texts.</li>
+    <li><strong>One record per change:</strong> the route change and the driver's confirmation live on the route, not in a chat.</li>
+    <li><strong>No parallel channel to run:</strong> dispatchers stop maintaining a second system alongside RouteLogic.</li>
+    <li><strong>Handoff-ready history:</strong> the next shift sees every change and acknowledgment without scrolling a group chat.</li>
   </ol>
 
   <div class="note">
-    <strong>Scope:</strong> This journey covers what Velocity changes. It does not address mid-route crashes, offline failure, photo upload failures or dashboard lag (BUG-2031, 2050, 2061, 2072), so a completion logged in stage 4 may still reach the dispatcher's board late.
+    <strong>Scope:</strong>
+    <ul>
+      <li>Stages 1 and 3 depend on real-time sync (BUG-2044, BUG-2072). If Velocity is limited to simplifying the interface, it addresses assignment time but not the dispatcher's core misery.</li>
+      <li>Drivers without signal (UXR-06, BUG-2050) won't receive route changes in stage 3, whatever the dispatcher does.</li>
+    </ul>
   </div>
 </main>
 </body>
