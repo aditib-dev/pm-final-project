@@ -1,17 +1,38 @@
 # Competitive Analysis & Journey Map (Module 2)
 
 ## Responses
-- **Role, who are you solving for? (the specific user segment or profile):** Persona 1: The frontline driver (composite of UXR-01, 08, 11, 12)
-Role: An experienced delivery driver who completes dozens of stops a day, often in poor conditions and with their hands full.
-- **Goal, what is this user ultimately trying to achieve?:** Get through the route fast, with every delivery recorded correctly the first time.
-- **Friction, the main barrier (moment of misery) stopping them from succeeding:** Friction: Marking a stop delivered takes three taps across three screens. Diego does this at a doorstep, in the rain, holding a package, and has started texting his dispatcher instead. Another driver says the "Start Route" button he uses 30 times a day is now buried under features he has never touched. All seven drivers in the focus group said speed of core actions matters more than any new feature.
-- **External tools, the outside platforms or tools the user is forced to use:** Driver mention texting the dispatcher but does not say which tool is used it can be whatsapp, sms or other.
-- **The process, the 3 to 5 manual steps the user takes to get the job done:** Complete the drop-off at the door. (Documented, UXR-01) The driver is at the doorstep, often in the rain, with a package in one hand.
-Skip "Mark delivered" in RouteLogic. (Documented, UXR-01) The driver avoids the three-tap, three-screen flow.
-Switch to a messaging app and identify the stop. (Inferred) The dispatcher needs to know which stop is done, so the message must name it by address, customer or stop number.
-Send the confirmation to the dispatcher. (Documented, UXR-01) The data says "texting" but doesn't name the app.
-Move on, with the stop still open in RouteLogic. (Inferred) The stop stays unmarked in the app unless the dispatcher updates it. The data doesn't say whether that happens.
-- **Core frustration, the exact moment the process feels most “broken”:** At step 2, delivery is done but it is three step process to mark delivery as done.
-- **The evidence, a specific quote or behavior from the research that proves this:** Diego, delivery driver, three years (UXR-01)
-"To mark a stop delivered I tap through three screens. In the rain, at a doorstep, with a package in one hand. I've started just texting my dispatcher instead."
+- **Role, who are you solving for? (the specific user segment or profile):** The dispatcher (composite of UXR-02, 09), A fleet dispatcher at a mid-size logistics company who assigns and reassigns routes and monitors drivers in real time.
+- **Goal, what is this user ultimately trying to achieve?:** Know where every driver and stop stands, and have route changes acted on immediately.
+- **Friction, the main barrier (moment of misery) stopping them from succeeding:** A reassigned route takes 10–15 minutes to reach the driver, who has often driven the wrong way by then, so the team runs a WhatsApp group as "the real system" (UXR-02). On the night shift, stops show "in progress" an hour after delivery, and the dispatcher says they can't trust the board (UXR-09).
+- **External tools, the outside platforms or tools the user is forced to use:** WhatsApp group (UXR-02): replaces RouteLogic for live route changes and coordination.
+- **The process, the 3 to 5 manual steps the user takes to get the job done:** Steps
+
+Documented (UXR-02): Reassign the route in RouteLogic.
+Documented (BUG-2044): The change takes 8–15 minutes to reach the driver, and no notification is sent.
+Inferred: Post the change in the WhatsApp group so the driver acts on it now.
+Inferred: Wait for the driver to reply in the chat to confirm. The board can't be relied on, because statuses lag up to an hour (UXR-09, BUG-2072).
+Documented (UXR-02): Treat the WhatsApp thread, not RouteLogic, as the record of what's actually happening.
+- **Core frustration, the exact moment the process feels most “broken”:** The process feels most broken between steps 2 and 3. The dispatcher has made the decision and entered it correctly in RouteLogic, but the driver doesn't see it and keeps driving on the old route. When the change finally lands, "they've driven the wrong way" (UXR-02).
+- **The evidence, a specific quote or behavior from the research that proves this:** Primary evidence: fleet dispatcher, mid-size 3PL (UXR-02)
+
+"I reassign a route and the driver doesn't see it for ten, fifteen minutes. By then they've driven the wrong way. We keep a WhatsApp group as the real system."
+
+This one quote covers the whole chain:
+
+Friction: "the driver doesn't see it for ten, fifteen minutes."
+The broken moment: "By then they've driven the wrong way."
+The behavior: "We keep a WhatsApp group as the real system."
+Supporting evidence
+
+Bug report (BUG-2044, severity Critical)
+
+"Dispatch reassignments take 8–15 min to propagate to the driver app; no push notification on route change. Drivers act on stale routes."
+
+This confirms the delay as a logged defect, rated at the highest severity. It adds the technical cause Diego's quote can't: no notification is sent. And it describes the same outcome: drivers acting on stale routes.
+
+Night-shift dispatcher (UXR-09)
+
+"Status updates from drivers lag on my dashboard. A stop shows 'in progress' when it was delivered an hour ago. I can't trust the board."
+
+This shows the problem runs in both directions: changes reach drivers late, and completed work reaches dispatch late. It's a second, independent dispatcher voice. It's backed by BUG-2072, which logs a 20–60 minute lag, rated Medium.
 - **Your journey map, a shareable link, or the map file you committed (e.g. journey-map.html):** https://github.com/aditib-dev/pm-final-project/blob/main/02-discovery/journey-map.html
