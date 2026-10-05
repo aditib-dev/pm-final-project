@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velocity Roadmap</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --card: #ffffff; --text: #1d1c1a; --muted: #62605a; --line: #dddbd2;
+    --brand: #0f6e56; --brand-soft: #e1f5ee;
+    --qw-bg: #e3f4e6; --qw-tx: #1d6b2c; --qw-bd: #7cc48a;
+    --mp-bg: #e6eefb; --mp-tx: #1f4f9c; --mp-bd: #86a8e0;
+    --fi-bg: #fbf3dc; --fi-tx: #7a5a0c; --fi-bd: #e2c46b;
+    --ts-bg: #fbe6e3; --ts-tx: #9c2f22; --ts-bd: #e39a8f;
+    --now: #0f6e56; --next: #1f4f9c; --later: #7a5a0c; --cut: #9c2f22;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171715; --card: #22211f; --text: #ecebe6; --muted: #aeaca3; --line: #3a3936;
+      --brand: #5dcaa5; --brand-soft: #0d3b30;
+      --qw-bg: #183a20; --qw-tx: #9fe0ab; --qw-bd: #3f8a4f;
+      --mp-bg: #1a2b47; --mp-tx: #a9c3f0; --mp-bd: #44669e;
+      --fi-bg: #3a2f12; --fi-tx: #ecd58c; --fi-bd: #8a7230;
+      --ts-bg: #45201b; --ts-tx: #f1aca2; --ts-bd: #93463c;
+      --now: #5dcaa5; --next: #86a8e0; --later: #e2c46b; --cut: #e39a8f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; }
+  main { max-width: 1180px; margin: 0 auto; padding: 28px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-end; }
+  .eyebrow { color: var(--brand); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  h1 { margin: 4px 0 0; font-size: 28px; font-weight: 650; }
+  .team { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .anchors { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 22px 0; }
+  .anchor { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14px; }
+  .anchor b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 2px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 18px; }
+  .toolbar span { font-size: 13px; color: var(--muted); margin-right: 4px; }
+  .chip { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
+  @media (prefers-color-scheme: dark) { .chip[aria-pressed="true"] { color: #0b1f19; } }
+  .search { margin-left: auto; border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: 7px 14px; font-size: 13px; min-width: 200px; }
+  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .lane { background: color-mix(in srgb, var(--card) 55%, transparent); border: 1px solid var(--line); border-radius: 14px; padding: 14px; min-height: 160px; }
+  .lane-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 3px solid var(--accent); padding-bottom: 8px; margin-bottom: 12px; }
+  .lane-head h2 { margin: 0; font-size: 17px; color: var(--accent); letter-spacing: .04em; }
+  .lane-head p { margin: 0; font-size: 12px; color: var(--muted); }
+  .count { font-size: 12px; color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--qbd); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: transform .12s ease, box-shadow .12s ease; }
+  .card:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+  .card:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .card-top { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+  .card h3 { margin: 0; font-size: 15px; font-weight: 600; }
+  .id { color: var(--muted); font-weight: 500; margin-right: 4px; }
+  .badge { flex-shrink: 0; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--qbg); color: var(--qtx); border: 1px solid var(--qbd); white-space: nowrap; }
+  .rationale { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); }
+  .details { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13px; }
+  .card.open .details { display: block; }
+  .meter { display: grid; grid-template-columns: 52px 1fr 20px; gap: 8px; align-items: center; margin: 4px 0; }
+  .bar { height: 7px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--qbd); border-radius: 4px; }
+  .q-qw { --qbg: var(--qw-bg); --qtx: var(--qw-tx); --qbd: var(--qw-bd); }
+  .q-mp { --qbg: var(--mp-bg); --qtx: var(--mp-tx); --qbd: var(--mp-bd); }
+  .q-fi { --qbg: var(--fi-bg); --qtx: var(--fi-tx); --qbd: var(--fi-bd); }
+  .q-ts { --qbg: var(--ts-bg); --qtx: var(--ts-tx); --qbd: var(--ts-bd); }
+  .cut { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .cut-head { display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-bottom: 3px solid var(--cut); padding-bottom: 8px; }
+  .cut-head h2 { margin: 0; font-size: 17px; color: var(--cut); letter-spacing: .04em; }
+  .cut-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+  .cut.collapsed .cut-list { display: none; }
+  .cut-list .card { margin: 0; opacity: .92; }
+  .cut-list h3 { text-decoration: line-through; text-decoration-color: var(--cut); }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; font-size: 12.5px; color: var(--muted); }
+  .legend .badge { margin-right: 4px; }
+  .empty { font-size: 13px; color: var(--muted); font-style: italic; padding: 8px 2px; }
+  .hidden { display: none !important; }
+  @media (max-width: 860px) { .lanes { grid-template-columns: 1fr; } .search { margin-left: 0; width: 100%; } }
+  @media print {
+    body { background: #fff; } .toolbar { display: none; } .card { break-inside: avoid; }
+    .details { display: block !important; } .cut.collapsed .cut-list { display: grid; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <div class="eyebrow">RouteLogic Velocity</div>
+      <h1>Product Roadmap</h1>
+      <div class="team">Team: 2 engineers · 1 designer · 1 CS lead</div>
+    </div>
+  </header>
+
+  <section class="anchors" aria-label="Strategic anchors">
+    <div class="anchor"><b>Persona</b>Fleet dispatcher: wants route changes acted on immediately and a board they can trust.</div>
+    <div class="anchor"><b>Primary metric</b>Median time from route change issued to driver acknowledgment in-app.</div>
+    <div class="anchor"><b>Guardrails</b>Manager Reporting CSAT ≥ 4.0 (now 4.5) · Coordinators × Core Dispatch CSAT ≥ 4.0 (now 4.1).</div>
+  </section>
+
+  <div class="toolbar" role="group" aria-label="Filter by quadrant">
+    <span>Quadrant:</span>
+    <button class="chip" data-filter="all" aria-pressed="true">All</button>
+    <button class="chip" data-filter="qw" aria-pressed="false">Quick Win</button>
+    <button class="chip" data-filter="mp" aria-pressed="false">Major Project</button>
+    <button class="chip" data-filter="fi" aria-pressed="false">Fill-In</button>
+    <button class="chip" data-filter="ts" aria-pressed="false">Time Sinker</button>
+    <input class="search" type="search" placeholder="Search features…" aria-label="Search features">
+  </div>
+
+  <section class="lanes">
+    <div class="lane" style="--accent: var(--now)">
+      <div class="lane-head"><div><h2>NOW</h2><p>Pilot · 4 weeks · 3 accounts</p></div><span class="count" data-count="now"></span></div>
+      <div data-lane="now"></div>
+    </div>
+    <div class="lane" style="--accent: var(--next)">
+      <div class="lane-head"><div><h2>NEXT</h2><p>GA release · weeks 5–8</p></div><span class="count" data-count="next"></span></div>
+      <div data-lane="next"></div>
+    </div>
+    <div class="lane" style="--accent: var(--later)">
+      <div class="lane-head"><div><h2>LATER</h2><p>Backlog</p></div><span class="count" data-count="later"></span></div>
+      <div data-lane="later"></div>
+    </div>
+  </section>
+
+  <section class="cut" id="cut">
+    <div class="cut-head" role="button" tabindex="0" aria-expanded="true">
+      <h2>CUT LIST</h2><span class="count" data-count="cut"></span>
+    </div>
+    <ul class="cut-list" data-lane="cut"></ul>
+  </section>
+
+  <div class="legend">
+    <span><span class="badge q-qw">Quick Win</span>High value · low effort</span>
+    <span><span class="badge q-mp">Major Project</span>High value · high effort</span>
+    <span><span class="badge q-fi">Fill-In</span>Low value · low effort</span>
+    <span><span class="badge q-ts">Time Sinker</span>Low value · high effort</span>
+    <span>Click a card to see Value and Effort scores.</span>
+  </div>
+</main>
+
+<script>
+  const QUAD = { qw: "Quick Win", mp: "Major Project", fi: "Fill-In", ts: "Time Sinker" };
+  const features = [
+    { id: "B6", name: "Driver Alert Notifications", lane: "now", q: "mp", v: 5, e: 4,
+      r: "The only feature that moves the primary metric, but BUG-2044 puts the delay in sync, so a real-time alert plus acknowledgment is tight for 2 engineers in 4 weeks." },
+    { id: "B1", name: "One-Click Compliance Checklist", lane: "next", q: "fi", v: 3, e: 3,
+      r: "The strongest M3 signal (14.6 vs 3.0 min, 48% completion, CSAT 2.2), but it doesn't change how fast a route change reaches the driver." },
+    { id: "B5", name: "Step Progress Indicator", lane: "later", q: "fi", v: 1, e: 1,
+      r: "It labels a slow workflow without touching reassignment or board trust." },
+    { id: "B9", name: "Compliance Audit Trail Export", lane: "later", q: "fi", v: 1, e: 2,
+      r: "A legal need with no link to the dispatcher's friction or primary metric." },
+    { id: "B10", name: "In-App Coordinator Training", lane: "later", q: "fi", v: 1, e: 1,
+      r: "The CS lead could deliver it without engineers, but training can't fix a sync delay." },
+    { id: "B2", name: "Smart Daily Report Auto-Fill", lane: "cut", q: "ts", v: 1, e: 4,
+      r: "AI work on a step no dispatcher mentioned, and it risks the 4.5 Manager Reporting guardrail." },
+    { id: "B3", name: "Shift Handoff Wizard", lane: "cut", q: "fi", v: 1, e: 3,
+      r: "Labelled M2 UXR, but no interview mentions handoff; the 6.8-minute figure comes from Snapshot 2." },
+    { id: "B4", name: "Mobile-First Coordinator Dashboard", lane: "cut", q: "ts", v: 1, e: 5,
+      r: "No driver or dispatcher asked for mobile-first." },
+    { id: "B7", name: "Contextual AI ETA Display", lane: "cut", q: "fi", v: 1, e: 3,
+      r: "ETAs built on statuses that lag up to an hour (BUG-2072) would undermine trust in the board. Coordinator adoption is 23%; the 11% shown is the driver figure." },
+    { id: "B8", name: "Fleet Analytics Manager View", lane: "cut", q: "ts", v: 1, e: 4,
+      r: "A Sales request for managers who already rate reporting at 4.5, adding the noise Velocity is meant to remove." }
+  ];
+
+  function cardHTML(f) {
+    return `
+      <div class="card-top">
+        <h3><span class="id">${f.id}</span>${f.name}</h3>
+        <span class="badge">${QUAD[f.q]}</span>
+      </div>
+      <p class="rationale">${f.r}</p>
+      <div class="details">
+        <div class="meter"><span>Value</span><span class="bar"><i style="width:${f.v * 20}%"></i></span><b>${f.v}</b></div>
+        <div class="meter"><span>Effort</span><span class="bar"><i style="width:${f.e * 20}%"></i></span><b>${f.e}</b></div>
+      </div>`;
+  }
+
+  features.forEach(f => {
+    const host = document.querySelector(`[data-lane="${f.lane}"]`);
+    const el = document.createElement(f.lane === "cut" ? "li" : "div");
+    el.className = `card q-${f.q}`;
+    el.tabIndex = 0;
+    el.dataset.q = f.q;
+    el.dataset.text = `${f.id} ${f.name} ${f.r}`.toLowerCase();
+    el.innerHTML = cardHTML(f);
+    const toggle = () => el.classList.toggle("open");
+    el.addEventListener("click", toggle);
+    el.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); toggle(); } });
+    host.appendChild(el);
+  });
+
+  let activeFilter = "all", query = "";
+  function apply() {
+    ["now", "next", "later", "cut"].forEach(lane => {
+      const host = document.querySelector(`[data-lane="${lane}"]`);
+      let shown = 0;
+      host.querySelectorAll(".card").forEach(c => {
+        const ok = (activeFilter === "all" || c.dataset.q === activeFilter) && (!query || c.dataset.text.includes(query));
+        c.classList.toggle("hidden", !ok);
+        if (ok) shown++;
+      });
+      let empty = host.querySelector(".empty");
+      if (!shown && !empty) { empty = document.createElement(lane === "cut" ? "li" : "div"); empty.className = "empty"; empty.textContent = "No matching features"; host.appendChild(empty); }
+      if (shown && empty) empty.remove();
+      const total = host.querySelectorAll(".card").length;
+      document.querySelector(`[data-count="${lane}"]`).textContent = shown === total ? `${total} feature${total === 1 ? "" : "s"}` : `${shown} of ${total}`;
+    });
+  }
+
+  document.querySelectorAll(".chip").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", "false"));
+    btn.setAttribute("aria-pressed", "true");
+    activeFilter = btn.dataset.filter;
+    apply();
+  }));
+  document.querySelector(".search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); apply(); });
+
+  const cut = document.getElementById("cut"), cutHead = cut.querySelector(".cut-head");
+  const toggleCut = () => { cut.classList.toggle("collapsed"); cutHead.setAttribute("aria-expanded", String(!cut.classList.contains("collapsed"))); };
+  cutHead.addEventListener("click", toggleCut);
+  cutHead.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleCut(); } });
+
+  apply();
+</script>
+</body>
+</html>
