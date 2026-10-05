@@ -2,7 +2,7 @@
 
 > Route changes now reach your drivers the moment you save them, and you see the second they confirm, so you can run dispatch from RouteLogic instead of a WhatsApp group.
 
-**Aditi Chaudahry · Product Management Cohort · Jun 2026**
+**Aditi Chaudhary · Product Management Cohort · Jun 2026**
 
 - **Repo:** https://github.com/aditib-dev/pm-final-project
 - **Prototype:** https://github.com/aditib-dev/pm-final-project/blob/main/02-discovery/journey-map.html
@@ -214,6 +214,6 @@ B6 Driver Route-Change Alerts, as specified in the M4 PRD: instant trigger · co
 
 - **Repo:** https://github.com/aditib-dev/pm-final-project
 - **Cohort:** Product Management Cohort · Jun 2026
-- **Author:** Aditi Chaudahry
+- **Author:** Aditi Chaudhary
 
 **↗ Submit to the learning platform**
