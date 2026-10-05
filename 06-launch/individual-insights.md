@@ -6,9 +6,9 @@
 
 ## Friction points
 
-_My biggest challenge was choosing who I was building for and staying consistent once I did. I started with "frontline coordinators" and a hook about complexity pushing work into spreadsheets, but nothing in the research supported spreadsheets. I then picked the driver persona because Diego's doorstep quote was the most vivid, but the quantitative data told a different story: drivers rated Core Dispatch 4.3, and every metric (NPS, workflow funnel, the Velocity pilot) measured coordinators. Switching to the dispatcher meant redoing my persona, workaround, journey map and hypothesis, and accepting that my strongest story wasn't my strongest case.
+My biggest challenge was choosing who I was building for and staying consistent once I did. I started with "frontline coordinators" and a hook about complexity pushing work into spreadsheets, but nothing in the research supported spreadsheets. I then picked the driver persona because Diego's doorstep quote was the most vivid, but the quantitative data told a different story: drivers rated Core Dispatch 4.3, and every metric (NPS, workflow funnel, the Velocity pilot) measured coordinators. Switching to the dispatcher meant redoing my persona, workaround, journey map and hypothesis, and accepting that my strongest story wasn't my strongest case.
 
-The hardest technical problem came in the experiment design. My primary metric, time to driver acknowledgment, only existed in the variant, because control drivers have no "Got it" button. The test couldn't produce a result, and I only caught it during the pre-launch review. Fixing it meant changing the metric to time-to-view, which has to be instrumented in both arms.._
+The hardest technical problem came in the experiment design. My primary metric, time to driver acknowledgment, only existed in the variant, because control drivers have no "Got it" button. The test couldn't produce a result, and I only caught it during the pre-launch review. Fixing it meant changing the metric to time-to-view, which has to be instrumented in both arms._
 
 _____
 
